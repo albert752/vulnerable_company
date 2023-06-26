@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Salad E-Store</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .salad-card {
+            width: 18rem;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Salad E-Store</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>Welcome to Salad E-Store</h1>
+        <p>Explore our delicious salads and place your order online.</p>
+        
+        <div class="row">
+            {% for salad in salads %}
+            <div class="col-md-4">
+                <div class="card salad-card">
+                    <img src="/static/{{ salad[1] }}.jpg" class="card-img-top" alt="Salad Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ salad[1] }} Salad</h5>
+                        <p class="card-text">{{ salad[3] }}</p>
+                        <p class="card-text">Price: ${{ salad[2] }}</p>
+                        <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
