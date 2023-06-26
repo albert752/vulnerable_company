@@ -1,9 +1,13 @@
 from flask import Flask, render_template, request, redirect, g
 import sqlite3
 import os
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 
 app = Flask(__name__)
 db_file = 'database.db'
+
+MAX_REQUESTS=1000000
 
 # Check if the database file exists
 if not os.path.exists(db_file):
@@ -19,6 +23,8 @@ if not os.path.exists(db_file):
     db.execute("INSERT INTO users (username, password) VALUES (?, ?)", ('root', 'root'))
     db.commit()
 
+limiter = Limiter(get_remote_address, app=app, default_limits=[f"{MAX_REQUESTS} per minute"])
+
 @app.before_request
 def before_request():
     g.db = sqlite3.connect(db_file)
@@ -29,6 +35,7 @@ def teardown_request(exception):
         g.db.close()
 
 @app.route('/')
+@limiter.limit(f"{MAX_REQUESTS}/minute")
 def home():
     # Retrieve all salads from the database
     cursor = g.db.execute("SELECT * FROM salads")
