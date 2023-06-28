@@ -1,13 +1,46 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <title>Profile Page</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario - Empresa de Ensaladas Online</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Profile</h1>
-        <p>Welcome to your profile page.</p>
+  <div class="container">
+    <div class="row mt-4">
+      <div class="col-md-6 offset-md-3">
+        <h1 class="text-center">Perfil de Usuario</h1>
+        <hr>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Información personal</h5>
+            <form>
+              <div class="form-group">
+                <label for="nombre">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" value="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" value="johndoe@example.com">
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" class="form-control" id="telefono" value="123456789">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="mt-4">
+          <a href="#" class="btn btn-danger btn-block">Cerrar sesión</a>
+        </div>
+      </div>
     </div>
+  </div>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
