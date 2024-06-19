@@ -31,7 +31,7 @@
                     <img src="/static/{{ salad[1] }}.jpg" class="card-img-top" alt="Salad Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ salad[1] }} Salad</h5>
-                        <p class="card-text">{{ salad[3] }}</p>
+                        <p class="card-text">{{ salad[3] | safe }}</p>
                         <p class="card-text">Price: ${{ salad[2] }}</p>
                         <a href="#" class="btn btn-primary">Add to Cart</a>
                     </div>

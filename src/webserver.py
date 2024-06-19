@@ -7,7 +7,7 @@ from flask_limiter.util import get_remote_address
 app = Flask(__name__)
 db_file = 'database.db'
 
-MAX_REQUESTS=1000000
+MAX_REQUESTS=10
 
 # Check if the database file exists
 if not os.path.exists(db_file):
@@ -47,20 +47,40 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
-        cursor = g.db.execute(f"SELECT * FROM users WHERE username='{username}' AND password='{password}'")
+        query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}';"
+        cursor = g.db.executescript(query)
         user = cursor.fetchone()
-
-        if user is not None:
+        if user != None:
             return redirect('/profile')
         else:
             return render_template('login.html', error=True)
     else:
         return render_template('login.html', error=False)
 
+@app.route('/login/machine', methods=['GET', 'POST'])
+def login_machine():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+                
+        cursor = g.db.execute(query)
+        user = cursor.fetchone()
+        
+        if user != None:
+            return redirect('/machine')
+        else:
+            return render_template('login.html', error=True)
+    else:
+        return render_template('login.html', error=False)
+
+@app.route('/machine')
+def machine():
+    return render_template('machine.html')
+
 @app.route('/profile')
 def profile():
     return render_template('profile.html')
 
 if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=80)
+    app.run(debug=True)
